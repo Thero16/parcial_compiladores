@@ -12,5 +12,5 @@ public class CelebrityDTO {
     private String name;
     private String profession;
     private Double netWorth;
-    private Boolean suspiciousActivity;
+    private Boolean suspiciousActivity=false;
 }
