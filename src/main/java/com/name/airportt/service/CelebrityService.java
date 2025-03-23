@@ -1,6 +1,8 @@
 package com.name.airportt.service;
 
 import com.name.airportt.dto.CelebrityDTO;
+import com.name.airportt.exceptions.InvalidDataException;
+import com.name.airportt.exceptions.NotFoundException;
 import com.name.airportt.model.Celebrity;
 import com.name.airportt.repository.CelebrityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,11 @@ public class CelebrityService implements ICelebrityService{
 
     @Override
     public CelebrityDTO addCelebrity(CelebrityDTO celebrityDTO) {
+
+        if(celebrityDTO.getName()==null || celebrityDTO.getProfession()==null){
+            throw new InvalidDataException("Name and profession are required");
+        }
+
         Celebrity celebrity = new Celebrity();
         celebrity.setName(celebrityDTO.getName());
         celebrity.setProfession(celebrityDTO.getProfession());
@@ -28,12 +35,8 @@ public class CelebrityService implements ICelebrityService{
 
     @Override
     public Optional<CelebrityDTO> getCelebrityById(int id) {
-        Celebrity celebrity = celebrityRepository.findById(id).orElse(null);
-        if(celebrity != null) {
-            return Optional.ofNullable(convertirADTO(celebrity));
-        } else{
-            return null;
-        }
+        Celebrity celebrity = celebrityRepository.findById(id).orElseThrow(()->new NotFoundException("Celebrity not found with id"+id));
+        return Optional.ofNullable(convertirADTO(celebrity));
     }
 
     @Override
@@ -43,7 +46,6 @@ public class CelebrityService implements ICelebrityService{
         if (existingCelebrityOpt.isPresent()) {
             Celebrity existingCelebrity = existingCelebrityOpt.get();
 
-            // Solo actualiza si el campo no es null en celebrityDTO
             if (celebrityDTO.getName() != null) {
                 existingCelebrity.setName(celebrityDTO.getName());
             }
@@ -60,7 +62,7 @@ public class CelebrityService implements ICelebrityService{
             celebrityRepository.save(existingCelebrity);
             return convertirADTO(existingCelebrity);
         } else {
-            throw new RuntimeException("Celebrity not found with ID: " + id);
+            throw new NotFoundException("Celebrity not found with id"+id);
         }
     }
 
@@ -69,7 +71,7 @@ public class CelebrityService implements ICelebrityService{
         if (celebrityRepository.existsById(id)) {
             celebrityRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Celebrity not found with ID: " + id);
+            throw new NotFoundException("Celebrity not found with id"+id);
         }
     }
 

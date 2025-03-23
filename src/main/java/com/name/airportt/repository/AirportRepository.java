@@ -1,4 +1,7 @@
 package com.name.airportt.repository;
 
-public interface AirportRepository {
+import com.name.airportt.model.Airport;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AirportRepository extends JpaRepository<Airport, Integer> {
 }

@@ -15,9 +15,9 @@ public class Celebrity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotBlank
+    @NotBlank(message = "name is required")
     private String name;
-    @NotBlank
+    @NotBlank(message = "profession is required")
     private String profession;
     private Double netWorth;
     private Boolean suspiciousActivity;

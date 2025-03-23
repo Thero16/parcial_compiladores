@@ -2,6 +2,7 @@ package com.name.airportt.controller;
 
 import com.name.airportt.dto.CelebrityDTO;
 import com.name.airportt.service.ICelebrityService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class CelebrityController {
     ICelebrityService celebrityService;
 
     @PostMapping("/")
-    public CelebrityDTO addCelebrity(@RequestBody CelebrityDTO celebrityDTO) {
+    public CelebrityDTO addCelebrity(@Valid @RequestBody CelebrityDTO celebrityDTO) {
         return celebrityService.addCelebrity(celebrityDTO);
     }
 
@@ -24,7 +25,7 @@ public class CelebrityController {
     }
 
     @PatchMapping("/actualizar/{id}")
-    public CelebrityDTO updateCelebrity(@PathVariable int id, @RequestBody CelebrityDTO celebrityDTO) {
+    public CelebrityDTO updateCelebrity(@Valid @PathVariable int id, @RequestBody CelebrityDTO celebrityDTO) {
         return celebrityService.updateCelebrity(id, celebrityDTO);
     }
 
