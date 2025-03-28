@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PrivateJetDTO {
     private int id;
-    private  String model;
-    private Integer capacity;
-    private Integer owner_id;
+    private String model;
+    private int capacity;
+    private int owner_id;
 }
