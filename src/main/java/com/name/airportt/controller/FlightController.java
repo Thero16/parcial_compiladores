@@ -33,6 +33,9 @@ public class FlightController {
         List<FlightDTO> suspiciousFlights = flightService.getSuspiciousFlights();
         return ResponseEntity.ok(suspiciousFlights);
     }
-
+    @DeleteMapping("/eliminar/{id}")
+    public void deleteFlight(@PathVariable int id) {
+        flightService.deleteFlight(id);
+    }
 
 }
