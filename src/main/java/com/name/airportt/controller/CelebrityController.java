@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/celebrities")
+@RequestMapping("/api/celebrities")
 public class CelebrityController {
     @Autowired
     ICelebrityService celebrityService;
@@ -19,17 +19,17 @@ public class CelebrityController {
         return celebrityService.addCelebrity(celebrityDTO);
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/{id}")
     public Optional<CelebrityDTO> buscarCelebrity(@PathVariable int id) {
         return celebrityService.getCelebrityById(id);
     }
 
-    @PatchMapping("/actualizar/{id}")
+    @PatchMapping("/{id}")
     public CelebrityDTO updateCelebrity(@Valid @PathVariable int id, @RequestBody CelebrityDTO celebrityDTO) {
         return celebrityService.updateCelebrity(id, celebrityDTO);
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCelebrity(@PathVariable int id) {
         celebrityService.deleteCelebrity(id);
     }

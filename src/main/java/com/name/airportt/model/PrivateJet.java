@@ -19,7 +19,7 @@ public class PrivateJet {
     private int id;
     @NotBlank(message = "model is required")
     private String model;
-    @NotNull(message = "capacity is required")
+    @NotBlank(message = "capacity is required")
     @Min(1)
     private int capacity;
     @ManyToOne

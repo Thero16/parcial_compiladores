@@ -32,15 +32,15 @@ public class Flight {
     @NotBlank(message = "arrival airport is required")
     private String arrival_airport;
 
-    @NotNull(message = "departure time is required")
+    @NotBlank(message = "departure time is required")
     private Timestamp departure_time;
 
-    @NotNull(message = "arrival time is required")
+    @NotBlank(message = "arrival time is required")
     private Timestamp arrival_time;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @NotNull(message = "purpose is required")
+    @NotBlank(message = "purpose is required")
     private Purpose purpose;
 
 }

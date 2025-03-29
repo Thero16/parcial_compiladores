@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/private_jets")
+@RequestMapping("/api/jets")
 public class PrivateJetController {
 
     @Autowired
@@ -20,17 +20,17 @@ public class PrivateJetController {
         return privateJetService.addPrivateJet(privateJetDTO);
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/{id}")
     public Optional<PrivateJetDTO> getPrivateJetById(@PathVariable int id) {
         return privateJetService.getPrivateJetById(id);
     }
 
-    @PatchMapping("/actualizar/{id}")
+    @PatchMapping("/{id}")
     public PrivateJetDTO updatePrivateJet(@Valid @PathVariable int id, @RequestBody PrivateJetDTO privateJetDTO) {
         return privateJetService.updatePrivateJet(id, privateJetDTO);
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public void deletePrivateJet(@PathVariable int id) {
         privateJetService.deletePrivateJet(id);
     }

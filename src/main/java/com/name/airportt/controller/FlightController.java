@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/flights")
+@RequestMapping("/api/flights")
 public class FlightController {
 
     @Autowired
@@ -23,17 +23,17 @@ public class FlightController {
         return flightService.addFlight(flightDTO);
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/{id}")
     public Optional<FlightDTO> getFlightById(@PathVariable int id) {
         return flightService.getFlightById(id);
     }
 
-    @GetMapping("/buscar/suspicious")
+    @GetMapping("/suspicious")
     public ResponseEntity<List<FlightDTO>> getSuspiciousFlights() {
         List<FlightDTO> suspiciousFlights = flightService.getSuspiciousFlights();
         return ResponseEntity.ok(suspiciousFlights);
     }
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public void deleteFlight(@PathVariable int id) {
         flightService.deleteFlight(id);
     }
