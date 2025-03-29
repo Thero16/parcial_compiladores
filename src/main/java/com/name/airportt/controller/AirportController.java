@@ -15,17 +15,23 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/airports")
+@Tag(name = "Aeropuertos", description = "Operaciones de consulta sobre aeropuertos")
 public class AirportController {
+
     @Autowired
-    IAirportService airportService;
+    private IAirportService airportService;
 
     @GetMapping("/")
-    public List<AirportDto> getAiports(){
+    @Operation(summary = "Obtener todos los aeropuertos",
+            description = "Devuelve una lista completa de todos los aeropuertos disponibles en el sistema")
+    public List<AirportDto> getAirports() {
         return airportService.getAirports();
     }
 
     @GetMapping("/{id}")
-    public Optional getAirportById(@PathVariable int id){
+    @Operation(summary = "Buscar aeropuerto por ID",
+            description = "Obtiene la información detallada de un aeropuerto específico mediante su identificador único")
+    public Optional<AirportDto> getAirportById(@PathVariable int id) {
         return airportService.getAirportById(id);
     }
 }
